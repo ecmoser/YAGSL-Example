@@ -130,6 +130,7 @@ public class Robot extends TimedRobot
       m_autonomousCommand.cancel();
     } else
     {
+      m_robotContainer.setMotorBrake(true);
       CommandScheduler.getInstance().cancelAll();
     }
   }
