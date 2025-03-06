@@ -1,15 +1,18 @@
 package swervelib.imu;
 
-import static edu.wpi.first.units.Units.DegreesPerSecond;
+import java.util.Optional;
 
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
+
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.util.Units;
+import static edu.wpi.first.units.Units.DegreesPerSecond;
 import edu.wpi.first.units.measure.MutAngularVelocity;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
-import java.util.Optional;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Communicates with the NavX({@link AHRS}) as the IMU.
@@ -113,7 +116,11 @@ public class NavXSwerve extends SwerveIMU
   @Override
   public Rotation3d getRawRotation3d()
   {
-    return invertedIMU ? imu.getRotation3d().unaryMinus() : imu.getRotation3d();
+    SmartDashboard.putBoolean("invertedIMU", invertedIMU);
+    SmartDashboard.putNumber("Raw Gyro Reading", Units.radiansToDegrees(imu.getRotation3d().getZ()));
+    SmartDashboard.putNumber("unaryMinus Gyro Reading", Units.radiansToDegrees((invertedIMU ? imu.getRotation3d().unaryMinus().getZ() : imu.getRotation3d().getZ())));
+    SmartDashboard.putNumber("negative Gyro Reading", Units.radiansToDegrees((invertedIMU ? imu.getRotation3d().times(-1).getZ() : imu.getRotation3d().getZ())));
+    return invertedIMU ? imu.getRotation3d() : imu.getRotation3d();
   }
 
   /**
