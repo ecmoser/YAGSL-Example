@@ -1,14 +1,14 @@
 package swervelib.imu;
 
-import static edu.wpi.first.units.Units.DegreesPerSecond;
+import java.util.Optional;
 
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import static edu.wpi.first.units.Units.DegreesPerSecond;
 import edu.wpi.first.units.measure.MutAngularVelocity;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import java.util.Optional;
 
 /**
  * IMU Swerve class for the {@link ADIS16470_IMU} device.
@@ -137,5 +137,10 @@ public class ADIS16470Swerve extends SwerveIMU
   public Object getIMU()
   {
     return imu;
+  }
+
+  @Override
+  public boolean getInvertedIMU(){
+    return invertedIMU;
   }
 }

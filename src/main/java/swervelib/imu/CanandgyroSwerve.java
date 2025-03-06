@@ -1,12 +1,13 @@
 package swervelib.imu;
 
-import static edu.wpi.first.units.Units.RotationsPerSecond;
+import java.util.Optional;
 
 import com.reduxrobotics.sensors.canandgyro.Canandgyro;
+
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
 import edu.wpi.first.units.measure.MutAngularVelocity;
-import java.util.Optional;
 
 /**
  * SwerveIMU interface for the Boron {@link Canandgyro} by Redux Robotics
@@ -140,5 +141,10 @@ public class CanandgyroSwerve extends SwerveIMU
   public Object getIMU()
   {
     return imu;
+  }
+
+  @Override
+  public boolean getInvertedIMU(){
+    return invertedIMU;
   }
 }

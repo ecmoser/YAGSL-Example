@@ -1,9 +1,10 @@
 package swervelib.imu;
 
+import java.util.Optional;
+
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.units.measure.MutAngularVelocity;
-import java.util.Optional;
 
 /**
  * Swerve IMU abstraction to define a standard interface with a swerve drive.
@@ -73,4 +74,6 @@ public abstract class SwerveIMU implements AutoCloseable
    * @return IMU object.
    */
   public abstract Object getIMU();
+
+  public abstract boolean getInvertedIMU();
 }

@@ -1019,7 +1019,7 @@ public class SwerveDrive implements AutoCloseable
   public Rotation2d getYaw()
   {
     // Read the imu if the robot is real or the accumulator if the robot is simulated.
-    return Rotation2d.fromRadians(imuReadingCache.getValue().getZ());
+    return getGyro().getInvertedIMU() ? Rotation2d.fromRadians(-imuReadingCache.getValue().getZ()) : Rotation2d.fromRadians(imuReadingCache.getValue().getZ());
   }
 
   /**

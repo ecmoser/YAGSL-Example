@@ -1,13 +1,13 @@
 package swervelib.imu;
 
-import static edu.wpi.first.units.Units.DegreesPerSecond;
+import java.util.Optional;
 
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation3d;
+import static edu.wpi.first.units.Units.DegreesPerSecond;
 import edu.wpi.first.units.measure.MutAngularVelocity;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import java.util.Optional;
 
 /**
  * Creates a IMU for {@link edu.wpi.first.wpilibj.AnalogGyro} devices, only uses yaw.
@@ -142,5 +142,10 @@ public class AnalogGyroSwerve extends SwerveIMU
   public Object getIMU()
   {
     return imu;
+  }
+
+  @Override
+  public boolean getInvertedIMU(){
+    return invertedIMU;
   }
 }

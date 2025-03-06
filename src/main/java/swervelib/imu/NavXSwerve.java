@@ -167,4 +167,9 @@ public class NavXSwerve extends SwerveIMU
   {
     return imu;
   }
+
+  @Override
+  public boolean getInvertedIMU(){
+    return invertedIMU;
+  }
 }
