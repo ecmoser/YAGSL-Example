@@ -20,7 +20,7 @@ public class NavXSwerve extends SwerveIMU
   /**
    * Mutable {@link MutAngularVelocity} for readings.
    */
-  private final MutAngularVelocity yawVel = new MutAngularVelocity(0, 0, DegreesPerSecond);
+  private final MutAngularVelocity yawVel      = new MutAngularVelocity(0, 0, DegreesPerSecond);
   /**
    * NavX IMU.
    */
@@ -28,7 +28,11 @@ public class NavXSwerve extends SwerveIMU
   /**
    * Offset for the NavX.
    */
-  private       Rotation3d         offset = new Rotation3d();
+  private       Rotation3d         offset      = new Rotation3d();
+  /**
+   * Inversion for the gyro
+   */
+  private       boolean            invertedIMU = false;
   /**
    * An {@link Alert} for if there is an error instantiating the NavX.
    */
@@ -57,8 +61,7 @@ public class NavXSwerve extends SwerveIMU
   }
 
   @Override
-  public void close()
-  {
+  public void close() {
     imu.close();
   }
 
@@ -98,9 +101,7 @@ public class NavXSwerve extends SwerveIMU
    */
   public void setInverted(boolean invertIMU)
   {
-    while (!imu.isConnected())
-      ;
-    imu.configureVelocity(false, false, false, invertIMU);
+    invertedIMU = invertIMU;
     setOffset(getRawRotation3d());
   }
 
@@ -112,7 +113,7 @@ public class NavXSwerve extends SwerveIMU
   @Override
   public Rotation3d getRawRotation3d()
   {
-    return imu.getRotation3d();
+    return invertedIMU ? imu.getRotation3d().unaryMinus() : imu.getRotation3d();
   }
 
   /**
